@@ -1,0 +1,24 @@
+name: PR Balrog — Evaluate Answers
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  checks: write
+  pull-requests: write
+  contents: read
+  actions: write
+
+jobs:
+  evaluate-quiz:
+    name: Evaluate Quiz Answers
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.comment.body, '!balrog')
+
+    steps:
+      - name: Evaluate answers
+        uses: oncleguigs/pr-balrog/evaluate@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          language: 'auto'
