@@ -6,9 +6,13 @@ on:
   workflow_dispatch:
     inputs:
       pr_number:
-        description: 'PR number to regenerate quiz for (used by !balrog retry)'
+        description: 'PR number to regenerate quiz for (used by !balrog retry / !balrog model:)'
         required: true
         type: number
+      model_override:
+        description: 'Model to use (used by !balrog model:<name>)'
+        required: false
+        type: string
 
 permissions:
   checks: write
@@ -24,7 +28,7 @@ jobs:
 
     steps:
       - name: Generate quiz
-        uses: oncleguigs/pr-balrog@main
+        uses: basilelt/pr-balrog@feat/checkbox-answer-mode
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ai-provider: github-models
@@ -33,4 +37,5 @@ jobs:
           quiz-size: 'auto'
           min-lines-threshold: '10'
           language: 'auto'
+          answer-mode: 'checkbox'
           pr-number-override: ${{ github.event.inputs.pr_number || '' }}

@@ -2,7 +2,7 @@ name: PR Balrog — Evaluate Answers
 
 on:
   issue_comment:
-    types: [created]
+    types: [created, edited]
 
 permissions:
   checks: write
@@ -14,11 +14,11 @@ jobs:
   evaluate-quiz:
     name: Evaluate Quiz Answers
     runs-on: ubuntu-latest
-    if: startsWith(github.event.comment.body, '!balrog')
+    if: startsWith(github.event.comment.body, '!balrog') || contains(github.event.comment.body, '<!-- balrog-mode: checkbox -->')
 
     steps:
       - name: Evaluate answers
-        uses: oncleguigs/pr-balrog/evaluate@main
+        uses: basilelt/pr-balrog/evaluate@feat/checkbox-answer-mode
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           language: 'auto'
