@@ -19,6 +19,7 @@ permissions:
   pull-requests: write
   contents: read
   models: read
+  actions: read
 
 jobs:
   generate-quiz:
@@ -28,7 +29,7 @@ jobs:
 
     steps:
       - name: Generate quiz
-        uses: basilelt/pr-balrog@feat/checkbox-answer-mode
+        uses: basilelt/pr-balrog@feat/eval-history-and-thinking-banner
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           ai-provider: github-models
