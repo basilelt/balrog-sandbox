@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: Evaluate answers
-        uses: basilelt/pr-balrog/evaluate@feat/checkbox-answer-mode
+        uses: basilelt/pr-balrog/evaluate@feat/eval-history-and-thinking-banner
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           language: 'auto'
